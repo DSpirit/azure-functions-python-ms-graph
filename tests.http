@@ -1,0 +1,31 @@
+################
+# Variables
+
+@host = http://localhost:7071/api
+@tenantSuffix = #EXT#@<tenant>>.onmicrosoft.com
+@name = mustermann
+@password = xWwvJ]6NMw+bWH-d
+
+
+#################
+# @name ListUser
+###
+GET {{host}}/users
+
+
+################
+# @name AddUser
+###
+POST {{host}}/users
+Content-Type: application/json
+
+{
+  "accountEnabled": true,
+  "displayName": "{{name}}",
+  "mailNickname": "{{name}}",
+  "userPrincipalName": "{{name}}{{tenantSuffix}}",
+  "passwordProfile" : {
+    "forceChangePasswordNextSignIn": true,
+    "password": "{{password}}"
+  }
+}
